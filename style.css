@@ -72,14 +72,9 @@ http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
     padding: 2px 2px;
 }
 
-label[for="s"] {
+/*label[for="s"] {
     display: none;
-}
-
-label[for="s"]:before {
-    content: "Cari Sprei";
-}
-
+}*/
 
 input,select,textarea{
     color: #eee;
