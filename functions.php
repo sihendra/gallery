@@ -33,7 +33,7 @@ function childtheme_menus() { ?>
         <div id="category-menu" class="menu">
             <ul id="category-nav" class="sf-menu">
                 <li class="home"><a href="<? bloginfo('url'); ?>">Home</a></li>
-                <?php wp_list_categories('title_li=&number=7'); ?>
+                <?php wp_list_categories('title_li=&number=100'); ?>
                 <li class="blog-description"><span><?php bloginfo('description'); ?></span></li>
             </ul>
         </div>
@@ -90,6 +90,10 @@ add_action('init', 'remove_index_loop');
 
 function gallery_index_loop() {
   global $post;
+  global $wp_query;
+  global $query_string;
+
+  query_posts($query_string . '&meta_key=_warung_product_code');
   /* Count the number of posts so we can insert a widgetized area */ $count = 1;
   while ( have_posts() ) : the_post() ?>
 
@@ -174,6 +178,10 @@ add_action('init', 'remove_archive_loop');
 
 function gallery_archive_loop() {
   global $post;
+  global $wp_query;
+  global $query_string;
+
+  query_posts($query_string . '&meta_key=_warung_product_code');
   while ( have_posts() ) : the_post(); ?>
 
 			<div id="post-<?php the_ID() ?>" class="<?php thematic_post_class() ?>">
@@ -197,6 +205,10 @@ add_action('init', 'remove_category_loop');
 
 function gallery_category_loop() {
   global $post;
+  global $wp_query;
+  global $query_string;
+
+  query_posts($query_string . '&meta_key=_warung_product_code');
   /* Count the number of posts so we can insert a widgetized area */ $count = 1;
   while ( have_posts() ) : the_post() ?>
 
@@ -227,6 +239,10 @@ add_action('init', 'remove_tag_loop');
 
 function gallery_tag_loop() {
   global $post;
+  global $wp_query;
+  global $query_string;
+
+  query_posts($query_string . '&meta_key=_warung_product_code');
   /* Count the number of posts so we can insert a widgetized area */ $count = 1;
   while ( have_posts() ) : the_post() ?>
 
