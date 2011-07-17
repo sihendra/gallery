@@ -4,6 +4,10 @@
 //
 //  Gallery Child Theme Functions
 //
+function childtheme_search_field_value($args) {
+    return 'Cari sprei di sini';
+}
+add_filter('search_field_value', 'childtheme_search_field_value');
 
 function childtheme_menu_args($args) {
     $args = array(
@@ -122,6 +126,33 @@ function gallery_index_loop() {
 }
 add_action('thematic_indexloop', 'gallery_index_loop');
 // End of INDEX
+
+
+// The Search Loop
+function remove_search_loop() {
+  remove_action('thematic_searchloop', 'thematic_search_loop');
+}
+add_action('init', 'remove_search_loop');
+
+function gallery_search_loop() {
+    global $post;
+    global $wp_query;
+    global $query_string;
+
+    query_posts($query_string . '&meta_key=_warung_product_code');
+	while ( have_posts() ) : the_post(); ?>
+
+			<div id="post-<?php the_ID() ?>" class="<?php thematic_post_class() ?>">
+				<div class="entry-content">
+					<?php childtheme_post_header() ?>
+                    <a href="<?php echo the_permalink() ?>"><span class="slide-title"><?php echo the_title(); ?></span>
+                    <img class="thumbnail" src="<?php if(get_post_meta($post->ID, 'thumbnail', $single = true)){echo get_post_meta($post->ID, 'thumbnail', $single = true);} else{bloginfo('url'); echo "/wp-content/themes/gallery/images/thumbnail-default.jpg";} ?>" width="125" height="125" alt="<?php echo the_title() ?>" /></a>
+				</div>
+			</div><!-- .post -->
+
+	<?php endwhile;
+}
+add_action('thematic_searchloop', 'gallery_search_loop');
 
 //Creating the content for the Single Post
 function remove_single_post() {

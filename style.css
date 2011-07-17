@@ -44,7 +44,7 @@ http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
     margin: 2px 2px;
     width: 16px;
     height: 16px;
-        -moz-border-radius: 3px;
+    -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
 
 }
@@ -454,6 +454,24 @@ body #access #category-menu .sf-menu ul a {
     padding:4px;
     text-align:center;
 }
+
+.wfeatured_widget {
+    width: 720px;
+}
+
+.wfeatured_widget li.cat-post-item {
+    float:left;
+    width:134px;
+}
+
+.wfeatured_widget ul:after{
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
 
 #shipping_form {
     padding: 0 2px 0 2px;
@@ -1049,20 +1067,21 @@ a.more-link .meta-nav {
     padding: 10px;
     margin: 10px 10px 20px 10px;
     background: #121212;
-    border: 1px solid #282828;
+    font-size: 12px;
+    /*border: 1px solid #282828;*/
 }
 #footer .widgetcontainer h3{
-    margin-bottom: 10px
+    margin-bottom: 10px;
 }
 #footer .widgetcontainer a:hover{
-    color: #999
+    color: #999;
 }
 #footer .reset{
-    clear: both
+    clear: both;
 }
 #siteinfo{
     text-align: center;
-    font-size: .8em
+    font-size: .8em;
 }
 #siteinfo a{
     text-decoration: none;
