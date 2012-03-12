@@ -1,48 +1,67 @@
 <?php
 
-
+define('THEMATIC_COMPATIBLE_BODY_CLASS', true);
 //
 //  Gallery Child Theme Functions
 //
 function childtheme_search_field_value($args) {
-    return 'Cari sprei di sini';
+    return 'sprei merah';
 }
 add_filter('search_field_value', 'childtheme_search_field_value');
 
-function childtheme_menu_args($args) {
-    $args = array(
-        'show_home' => 'Home',
-        'sort_column' => 'menu_order',
-        'menu_class' => 'menu',
-        'echo' => true
-    );
-	return $args;
-}
-add_filter('wp_page_menu_args', 'childtheme_menu_args');
-
-// Adds a link to the author and other contributors
-function childtheme_theme_link($themelink) {
-      return $themelink . ' &amp; <a href="http://chris-wallace.com/2009/05/04/gallery-wordpress-theme/" title="Gallery Wordpress Theme" rel="designer">Gallery WordPress Theme</a> by <a href="http://chris-wallace.com">Chris Wallace</a>.<br /> Released by <a href="http://www.smashingmagazine.com">Smashing Magazine</a>. <a href="http://www.komodomedia.com/blog/2008/12/social-media-mini-iconpack/" title="Social Media Icons">Social Media Icons</a> by Rogie King';
-}
-add_filter('thematic_theme_link', 'childtheme_theme_link');
-
 // Add a drop down category menu
-function childtheme_menus() { ?>
-        <div id="page-menu" class="menu">
-            <ul id="page-nav" class="sf-menu">
-                <li class="rss"><a href="<?php bloginfo('rss2_url'); ?>">RSS Feed</a></li>
-                <?php wp_list_pages('title_li='); ?>
-            </ul>
+function childtheme_override_access() { ?>
+<div id="access">
+    <?php
+    if ((function_exists("has_nav_menu")) && (has_nav_menu('secondary-menu'))) {
+        $argsPage = array (
+		'theme_location'	=> 'secondary-menu',
+		'menu'			=> '',
+		'container'		=> 'div',
+		'container_class'	=> 'menu',
+                'container_id'          => 'page-menu',
+		'menu_class'		=> 'sf-menu',
+                'menu_id'		=> 'page-nav',
+                'items_wrap'            => '<ul  id="page-nav" class="sf-menu"><li class="rss"><a href="'.get_bloginfo('rss2_url').'">RSS Feed</a></li>%3$s</ul>'
+	);
+        
+        echo wp_nav_menu($argsPage);
+    }
+    
+    if ((function_exists("has_nav_menu")) && (has_nav_menu('primary-menu'))) {
+        
+        $args = array (
+		'theme_location'	=> 'primary-menu',
+		'menu'			=> '',
+		'container'		=> 'div',
+		'container_class'	=> 'menu',
+                'container_id'          => 'category-menu',
+		'menu_class'		=> 'sf-menu',
+                'menu_id'		=> 'category-nav',
+                'items_wrap'            => '<ul id="category-nav" class="sf-menu"><li class="home"><a href="'. get_bloginfo('url').'">Home</a></li>%3$s</ul>'
+	);
+        
+        echo wp_nav_menu($args);    
+    }
+    ?>
+        <div>
+            <form id="searchform" method="get">
+                <div>
+                    <input id="s" name="s" type="text" value="Cari sprei di sini" onfocus="if (this.value == 'Cari sprei di sini') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Cari sprei di sini';}" size="32" tabindex="1">
+                    <input id="searchsubmit" name="searchsubmit" type="submit" value="Search" tabindex="2">
+                </div>
+            </form>
         </div>
-        <div id="category-menu" class="menu">
-            <ul id="category-nav" class="sf-menu">
-                <li class="home"><a href="<? bloginfo('url'); ?>">Home</a></li>
-                <?php wp_list_categories('title_li=&number=100'); ?>
-                <li class="blog-description"><span><?php bloginfo('description'); ?></span></li>
-            </ul>
-        </div>
+</div>
 <?php }
-add_action('wp_page_menu','childtheme_menus');
+
+register_nav_menus(
+        array(
+            'secondary-menu' => 'Top Menu',
+            'primary-menu' => 'Main Menu'
+        )
+);
+
 
 // Remove sidebar on gallery-style pages
 function remove_sidebar() {

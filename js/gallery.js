@@ -8,19 +8,19 @@ jQuery(window).load(function(){
   jQuery(".content img.thumbnail").lazyload();
 
   // The magic sliding panels
-	jQuery('.entry-content a span.slide-title').css({
-		opacity : '0.0'
-	}).parent('a').append('<span class="cover-up"></span>');
-	jQuery('.entry-content a').mouseover(function(e){
-      jQuery(this).find('img.thumbnail').stop().animate({
-	  	marginTop : '-25px'
-	  }, 100).parent('a').find('span.slide-title').stop().fadeTo("slow",1.0);
-	});
-	jQuery('.entry-content a').mouseout(function(e){
-      jQuery(this).find('img.thumbnail').stop().animate({
-	  	marginTop : '0'
-	  }, 100).parent('a').find('span.slide-title').stop().fadeTo("slow",0.0);
-	});
+//	jQuery('.entry-content a span.slide-title').css({
+//		opacity : '0.0'
+//	}).parent('a').append('<span class="cover-up"></span>');
+//	jQuery('.entry-content a').mouseover(function(e){
+//      jQuery(this).find('img.thumbnail').stop().animate({
+//	  	marginTop : '-25px'
+//	  }, 100).parent('a').find('span.slide-title').stop().fadeTo("slow",1.0);
+//	});
+//	jQuery('.entry-content a').mouseout(function(e){
+//      jQuery(this).find('img.thumbnail').stop().animate({
+//	  	marginTop : '0'
+//	  }, 100).parent('a').find('span.slide-title').stop().fadeTo("slow",0.0);
+//	});
   
   // Comment Author URL hover effect
   jQuery('.comment-author a.url').mouseover(function(e){
